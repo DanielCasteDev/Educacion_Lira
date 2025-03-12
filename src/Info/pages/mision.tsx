@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import { PuzzlePieceIcon, ChartBarIcon, GlobeAltIcon } from "@heroicons/react/24/solid"; // Importa los iconos que necesitas
 
 export default function MisionVision() {
   const [scrolled, setScrolled] = useState(false);
@@ -126,17 +127,17 @@ export default function MisionVision() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: "🎮",
+                icon: <PuzzlePieceIcon className="h-12 w-12 text-orange-500" />, // Icono de rompecabezas
                 title: "Juegos Interactivos",
                 desc: "Actividades divertidas que enseñan a los niños a leer mientras juegan.",
               },
               {
-                icon: "📊",
+                icon: <ChartBarIcon className="h-12 w-12 text-orange-500" />, // Icono de gráfico
                 title: "Seguimiento Personalizado",
                 desc: "Adaptamos el contenido al ritmo de aprendizaje de cada niño.",
               },
               {
-                icon: "🌍",
+                icon: <GlobeAltIcon className="h-12 w-12 text-orange-500" />, // Icono de globo
                 title: "Acceso Global",
                 desc: "Llegamos a familias de todo el mundo, sin importar su ubicación.",
               },
@@ -150,7 +151,10 @@ export default function MisionVision() {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <div className="text-4xl mb-4 text-orange-500">{item.icon}</div>
+                {/* Contenedor para centrar el icono */}
+                <div className="flex justify-center items-center mb-4">
+                  {item.icon}
+                </div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{item.title}</h3>
                 <p className="text-gray-600">{item.desc}</p>
               </motion.div>

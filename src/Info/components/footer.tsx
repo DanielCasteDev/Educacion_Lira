@@ -22,7 +22,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {["Twitter", "Facebook", "Instagram", "YouTube"].map((item) => (
+            {["Twitter", "Facebook", "Instagram"].map((item) => (
               <a
                 key={item}
                 href="#"

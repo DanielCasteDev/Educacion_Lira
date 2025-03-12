@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion"; // Eliminamos AnimatePresence si no se usa
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ArrowDown } from "lucide-react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import cr7Image from "../assets/cr7.webp"; // Asegúrate de que la ruta sea correcta
+import cr7Image from "../assets/cr7.webp";
+import Sphere from "./components/sphere";
+import {
+  BookOpenIcon,
+  DevicePhoneMobileIcon,
+  ChartBarIcon,
+  UserIcon,
+  ArrowPathIcon,
+  RocketLaunchIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/solid";
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
-  const [, setCurrentSection] = useState(0); // Mantenemos si se usa
+  const [, setCurrentSection] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,147 +35,106 @@ export default function App() {
       title: "Aprendizaje Interactivo",
       description:
         "Transformamos la lectura en una experiencia dinámica y atractiva para los niños.",
-        image: cr7Image, // Usa la variable importada
-      },
+      image: cr7Image,
+    },
     {
       title: "Personalización del Contenido",
       description:
         "Adaptamos las actividades a los estilos de aprendizaje de cada niño.",
-        image: cr7Image, // Usa la variable importada
-      },
+      image: cr7Image,
+    },
     {
       title: "Seguimiento del Progreso",
       description:
         "Medimos el avance de los estudiantes con herramientas innovadoras.",
-        image: cr7Image, // Usa la variable importada
-      },
+      image: cr7Image,
+    },
   ];
 
   return (
     <div className="min-h-screen bg-white text-black">
+      {/* Fondo degradado */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background: "linear-gradient(to right, #FEF3C7, #FFEDD5)",
+        }}
+      ></div>
+
+      {/* Esferas rebotando */}
+      <div className="absolute inset-0 z-10">
+        <Sphere size={50} color="rgba(255, 165, 0, 0.6)" />
+        <Sphere size={70} color="rgba(255, 140, 0, 0.6)" />
+        <Sphere size={40} color="rgba(255, 99, 71, 0.6)" />
+        <Sphere size={60} color="rgba(255, 215, 0, 0.6)" />
+        <Sphere size={80} color="rgba(255, 165, 0, 0.6)" />
+        <Sphere size={90} color="rgba(255, 140, 0, 0.6)" />
+        <Sphere size={30} color="rgba(255, 99, 71, 0.6)" />
+        <Sphere size={100} color="rgba(255, 215, 0, 0.6)" />
+        <Sphere size={55} color="rgba(255, 165, 0, 0.6)" />
+        <Sphere size={65} color="rgba(255, 140, 0, 0.6)" />
+      </div>
+
       {/* Navbar */}
       <Navbar scrolled={scrolled} />
 
       {/* Hero Section */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-yellow-100 to-orange-100"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-          />
-          <motion.div
-            className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-orange-200"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
-          <motion.div
-            className="absolute top-32 -left-16 w-32 h-32 rounded-full bg-yellow-200"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          />
-        </div>
-
-        <div className="container mx-auto px-4 z-10">
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6 text-center text-orange-600"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+      <section className="h-screen flex items-center justify-center relative">
+        <div className="container mx-auto px-4 z-20">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-center text-orange-600">
             LIRA: Aprendizaje de Lectura
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-center max-w-2xl mx-auto mb-12 text-orange-800"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          </h1>
+          <p className="text-xl md:text-2xl text-center max-w-2xl mx-auto mb-12 text-orange-800">
             Una plataforma digital que transforma la lectura en una experiencia interactiva y personalizada para niños.
-          </motion.p>
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+          </p>
+          <div className="flex justify-center">
             <button className="rounded-full px-8 py-6 bg-orange-500 text-white hover:bg-orange-600 transition">
               Explorar
             </button>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 1,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
-            repeatDelay: 0.5,
-          }}
-        >
+        {/* Flecha animada */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
           <ArrowDown className="animate-bounce text-orange-500" />
-        </motion.div>
+        </div>
       </section>
 
       {/* Featured Sections */}
-      <section className="py-20 bg-orange-50">
+      <section className="py-20 bg-orange-50 relative z-20">
         <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600">
             Características Principales
-          </motion.h2>
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { icon: "📚", title: "Interactividad", desc: "Actividades dinámicas que captan la atención de los niños." },
-              { icon: "🎮", title: "Gamificación", desc: "Juegos educativos que refuerzan el aprendizaje." },
-              { icon: "📊", title: "Análisis de Datos", desc: "Seguimiento personalizado del progreso de cada niño." },
-              { icon: "🧒", title: "Personalización", desc: "Contenidos adaptados a los estilos de aprendizaje." },
-              { icon: "🔄", title: "Retroalimentación", desc: "Mecanismos efectivos para reforzar el conocimiento." },
-              { icon: "🚀", title: "Innovación", desc: "Tecnología avanzada para una enseñanza eficiente." },
+              { icon: <BookOpenIcon className="h-12 w-12 text-orange-500" />, title: "Interactividad", desc: "Actividades dinámicas que captan la atención de los niños." },
+              { icon: <DevicePhoneMobileIcon className="h-12 w-12 text-orange-500" />, title: "Gamificación", desc: "Juegos educativos que refuerzan el aprendizaje." },
+              { icon: <ChartBarIcon className="h-12 w-12 text-orange-500" />, title: "Análisis de Datos", desc: "Seguimiento personalizado del progreso de cada niño." },
+              { icon: <UserIcon className="h-12 w-12 text-orange-500" />, title: "Personalización", desc: "Contenidos adaptados a los estilos de aprendizaje." },
+              { icon: <ArrowPathIcon className="h-12 w-12 text-orange-500" />, title: "Retroalimentación", desc: "Mecanismos efectivos para reforzar el conocimiento." },
+              { icon: <RocketLaunchIcon className="h-12 w-12 text-orange-500" />, title: "Innovación", desc: "Tecnología avanzada para una enseñanza eficiente." },
             ].map((item, i) => (
-              <motion.div
+              <div
                 key={i}
                 className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
               >
-                <div className="text-4xl mb-4 text-orange-500">{item.icon}</div>
+                <div className="flex justify-center mb-4">{item.icon}</div>
                 <h3 className="text-xl font-semibold mb-2 text-orange-600">{item.title}</h3>
                 <p className="text-gray-600">{item.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Showcase Section */}
-      <section className="py-20">
+      <section className="py-20 relative z-20">
         <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600">
             Nuestro Enfoque
-          </motion.h2>
+          </h2>
 
           <div className="relative">
             <Slider
@@ -203,30 +171,30 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-orange-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white relative z-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-2xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">¿Listo para Transformar la Educación?</h2>
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              ¿Listo para Transformar la Educación?
+            </h2>
             <p className="text-lg mb-8 text-orange-100">
               Contáctanos hoy para llevar el aprendizaje de la lectura al siguiente nivel.
             </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <button className="rounded-full px-8 py-6 bg-white text-orange-600 hover:bg-orange-100 transition">
-                Contactar Ahora
-              </button>
-            </motion.div>
-          </motion.div>
+            <a
+              href="/contacto"
+              className="inline-flex items-center justify-center rounded-full px-8 py-6 bg-white text-orange-600 hover:bg-orange-50 hover:text-orange-700 transition-all duration-300"
+            >
+              <span>Contactar Ahora</span>
+              <ArrowRightIcon className="h-5 w-5 ml-2" />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <Footer />
+      <div className="relative z-30"> {/* Asegura que el Footer esté por encima de otros elementos */}
+        <Footer />
+      </div>
     </div>
   );
 }
