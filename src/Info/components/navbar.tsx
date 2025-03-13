@@ -45,7 +45,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
               <motion.a
                 key={item.name}
                 href={item.path} // Usa el atributo href para redirigir
-                className="hover:text-orange-500 transition-colors text-orange-800"
+                className="hover:text-orange-500 transition-colors text-orange-800 font-semibold text-lg tracking-wide"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * i }}
@@ -55,7 +55,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
             ))}
             <motion.a
               href="/login" // Redirige al login
-              className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition"
+              className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -102,7 +102,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
                 <motion.a
                   key={item.name}
                   href={item.path} // Usa el atributo href para redirigir
-                  className="text-2xl font-light text-orange-800"
+                  className="text-2xl font-semibold text-orange-800 tracking-wide"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * i }}
@@ -113,7 +113,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
               ))}
               <motion.a
                 href="/login" // Redirige al login
-                className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition"
+                className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
