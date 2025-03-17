@@ -3,11 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ArrowDown, X } from "lucide-react";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
-import cr7Image from "../assets/cr7.webp";
-import lira1 from "../assets/iphone.png";
-import Sphere from "./components/sphere";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import cr7Image from "../../assets/cr7.webp";
+import lira1 from "../../assets/iphone.png";
+import Sphere from "../components/sphere";
 import {
   BookOpenIcon,
   DevicePhoneMobileIcon,
@@ -163,47 +163,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Sección de Descarga de la App para LIRA */}
-      <section className="py-20 bg-gradient-to-r from-orange-400 to-orange-500 text-white relative z-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            {/* Texto y botones */}
-            <div className="w-full md:w-1/2 text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                LIRA: Aprendizaje de Lectura
-              </h2>
-              <p className="text-lg mb-8 text-orange-100">
-                Descarga la app y transforma la lectura en una experiencia interactiva y personalizada para los niños. Monitorea su progreso y disfruta de herramientas innovadoras.
-              </p>
-              <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 bg-black text-white hover:bg-gray-900 transition-all duration-300"
-                >
-                  <FaGooglePlay className="h-6 w-6 mr-2" />
-                  <span>Google Play</span>
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 bg-black text-white hover:bg-gray-900 transition-all duration-300"
-                >
-                  <FaAppStoreIos className="h-6 w-6 mr-2" />
-                  <span>App Store</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Imagen del teléfono */}
-            <div className="w-full md:w-1/2 flex justify-center">
-              <img
-                src={lira1}
-                alt="LIRA en el teléfono"
-                className="w-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Showcase Section Mejorada */}
       <section className="py-20 bg-white relative z-20">
@@ -262,53 +222,44 @@ export default function App() {
           </div>
         </div>
       </section>
-
-      {/* Modal Mejorado */}
-      {isModalOpen && selectedSection && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
-          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full mx-4 overflow-hidden transform transition-all duration-300 ease-in-out">
-            {/* Encabezado del modal */}
-            <div className="bg-orange-500 p-6 flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-white">{selectedSection.title}</h3>
-              <button
-                onClick={closeModal}
-                className="text-white hover:text-orange-200 transition-colors"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-
-            {/* Cuerpo del modal */}
-            <div className="p-8">
-              <div className="flex flex-col items-center">
-                <div className="mb-6 text-orange-500">{selectedSection.icon}</div>
-                <p className="text-lg text-orange-700 mb-6 text-center">
-                  {selectedSection.description}
-                </p>
-                <p className="text-gray-600 mb-6">{selectedSection.details}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Contact Section */}
+      {/* Sección de Descarga de la App para LIRA */}
       <section className="py-20 bg-gradient-to-r from-orange-400 to-orange-500 text-white relative z-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              ¿Listo para Transformar la Educación?
-            </h2>
-            <p className="text-lg mb-8 text-orange-100">
-              Contáctanos hoy para llevar el aprendizaje de la lectura al siguiente nivel.
-            </p>
-            <a
-              href="/contacto"
-              className="inline-flex items-center justify-center rounded-full px-8 py-6 bg-white text-orange-500 hover:bg-orange-50 hover:text-orange-700 transition-all duration-300"
-            >
-              <span>Contactar Ahora</span>
-              <ArrowRightIcon className="h-5 w-5 ml-2" />
-            </a>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            {/* Texto y botones */}
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                LIRA: Aprendizaje de Lectura
+              </h2>
+              <p className="text-lg mb-8 text-orange-100">
+                Descarga la app y transforma la lectura en una experiencia interactiva y personalizada para los niños. Monitorea su progreso y disfruta de herramientas innovadoras.
+              </p>
+              <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 bg-black text-white hover:bg-gray-900 transition-all duration-300"
+                >
+                  <FaGooglePlay className="h-6 w-6 mr-2" />
+                  <span>Google Play</span>
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center justify-center rounded-lg px-6 py-3 bg-black text-white hover:bg-gray-900 transition-all duration-300"
+                >
+                  <FaAppStoreIos className="h-6 w-6 mr-2" />
+                  <span>App Store</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Imagen del teléfono */}
+            <div className="w-full md:w-1/2 flex justify-center">
+              <img
+                src={lira1}
+                alt="LIRA en el teléfono"
+                className="w-80"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -361,6 +312,56 @@ export default function App() {
           </div>
         </div>
       </section>
+
+{/* Contact Section*/}
+<section className="py-20 bg-white relative z-20">
+  <div className="container mx-auto px-4">
+    <div className="max-w-2xl mx-auto text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-orange-500">
+        ¿Listo para Transformar la Educación?
+      </h2>
+      <p className="text-lg mb-8 text-gray-600">
+        Contáctanos hoy para llevar el aprendizaje de la lectura al siguiente nivel.
+      </p>
+      <a
+        href="/contacto"
+        className="inline-flex items-center justify-center rounded-full px-8 py-6 bg-orange-500 text-white hover:bg-orange-600 transition-all duration-300"
+      >
+        <span>Contactar Ahora</span>
+        <ArrowRightIcon className="h-5 w-5 ml-2" />
+      </a>
+    </div>
+  </div>
+</section>
+
+      {/* Modal Mejorado */}
+      {isModalOpen && selectedSection && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full mx-4 overflow-hidden transform transition-all duration-300 ease-in-out">
+            {/* Encabezado del modal */}
+            <div className="bg-orange-500 p-6 flex justify-between items-center">
+              <h3 className="text-2xl font-bold text-white">{selectedSection.title}</h3>
+              <button
+                onClick={closeModal}
+                className="text-white hover:text-orange-200 transition-colors"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+
+            {/* Cuerpo del modal */}
+            <div className="p-8">
+              <div className="flex flex-col items-center">
+                <div className="mb-6 text-orange-500">{selectedSection.icon}</div>
+                <p className="text-lg text-orange-700 mb-6 text-center">
+                  {selectedSection.description}
+                </p>
+                <p className="text-gray-600 mb-6">{selectedSection.details}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <div className="relative z-30">

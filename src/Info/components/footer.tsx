@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
-import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa"; // Iconos de redes sociales
+import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer className="py-10 bg-orange-50">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Logo o nombre de la aplicación y enlaces a las secciones */}
           <motion.div
             className="flex flex-col items-center md:items-start mb-6 md:mb-0"
             initial={{ opacity: 0, y: 20 }}
@@ -15,12 +14,8 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="text-3xl font-bold text-orange-600 mb-4">LIRA</div>
-            <div className="flex space-x-6">
-              {[
-                { name: "Inicio", path: "/" },
-                { name: "Que es LIRA?", path: "/mision" },
-                { name: "Contacto", path: "/contacto" },
-              ].map((item) => (
+            <div className="flex space-x-6 mb-4">
+              {[{ name: "Inicio", path: "/" }, { name: "Que es LIRA?", path: "/mision" }, { name: "Contacto", path: "/contacto" }].map((item) => (
                 <a
                   key={item.name}
                   href={item.path}
@@ -30,9 +25,27 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            <div className="flex space-x-6 mt-4">
+              <motion.a
+                href="/login"
+                className="hover:text-orange-500 transition-colors text-orange-800 font-semibold text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Iniciar Sesión
+              </motion.a>
+              <motion.a
+                href="/registro"
+                className="hover:text-orange-500 transition-colors text-orange-800 font-semibold text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                Registrarse
+              </motion.a>
+            </div>
           </motion.div>
-
-          {/* Iconos de redes sociales */}
           <motion.div
             className="flex space-x-6 mb-6 md:mb-0"
             initial={{ opacity: 0, y: 20 }}
@@ -66,8 +79,6 @@ export default function Footer() {
             </a>
           </motion.div>
         </div>
-
-        {/* Derechos de autor centrados */}
         <motion.div
           className="text-center text-orange-600 text-sm mt-6"
           initial={{ opacity: 0, y: 20 }}

@@ -37,11 +37,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
           </motion.div>
 
           <div className="hidden md:flex space-x-8 items-center">
-            {[
-              { name: "Inicio", path: "/" },
-              { name: "Que es LIRA?", path: "/mision" },
-              { name: "Contacto", path: "/contacto" },
-            ].map((item, i) => (
+            {[{ name: "Inicio", path: "/" }, { name: "Que es LIRA?", path: "/mision" }, { name: "Contacto", path: "/contacto" }].map((item, i) => (
               <motion.a
                 key={item.name}
                 href={item.path} // Usa el atributo href para redirigir
@@ -53,6 +49,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
                 {item.name}
               </motion.a>
             ))}
+            {/* Botón de iniciar sesión */}
             <motion.a
               href="/login" // Redirige al login
               className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
@@ -61,6 +58,16 @@ export default function Navbar({ scrolled }: NavbarProps) {
               transition={{ delay: 0.4 }}
             >
               Iniciar Sesión
+            </motion.a>
+            {/* Botón de registro */}
+            <motion.a
+              href="/registro" // Redirige a la página de registro
+              className="rounded-full px-6 py-2 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition font-semibold text-lg tracking-wide"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Registrarse
             </motion.a>
           </div>
 
@@ -94,31 +101,39 @@ export default function Navbar({ scrolled }: NavbarProps) {
               </button>
             </div>
             <div className="flex flex-col items-center justify-center flex-1 space-y-8">
-              {[
-                { name: "Inicio", path: "/" },
-                { name: "Que es LIRA?", path: "/mision" },
-                { name: "Contacto", path: "/contacto" },
-              ].map((item, i) => (
+              {[{ name: "Inicio", path: "/" }, { name: "Que es LIRA?", path: "/mision" }, { name: "Contacto", path: "/contacto" }].map((item, i) => (
                 <motion.a
                   key={item.name}
-                  href={item.path} // Usa el atributo href para redirigir
+                  href={item.path} 
                   className="text-2xl font-semibold text-orange-800 tracking-wide"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * i }}
-                  onClick={() => setMenuOpen(false)} // Cierra el menú móvil
+                  onClick={() => setMenuOpen(false)} 
                 >
                   {item.name}
                 </motion.a>
               ))}
+             
               <motion.a
-                href="/login" // Redirige al login
+                href="/login" 
                 className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 Iniciar Sesión
+              </motion.a>
+             
+              <motion.a
+                href="/registro" 
+                className="rounded-full px-6 py-2 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition font-semibold text-lg tracking-wide"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => setMenuOpen(false)} 
+              >
+                Registrarse
               </motion.a>
             </div>
           </motion.div>
