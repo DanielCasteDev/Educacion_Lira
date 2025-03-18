@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, UserPlus } from "lucide-react"; // Importa íconos
 import liraLogo from "../../assets/lira.png"; // Importa tu logo
 
 interface NavbarProps {
@@ -36,8 +36,12 @@ export default function Navbar({ scrolled }: NavbarProps) {
             />
           </motion.div>
 
-          <div className="hidden md:flex space-x-8 items-center">
-            {[{ name: "Inicio", path: "/" }, { name: "Que es LIRA?", path: "/mision" }, { name: "Contacto", path: "/contacto" }].map((item, i) => (
+          <div className="hidden md:flex space-x-6 items-center">
+            {[
+              { name: "Inicio", path: "/" },
+              { name: "Que es LIRA?", path: "/mision" },
+              { name: "Contacto", path: "/contacto" },
+            ].map((item, i) => (
               <motion.a
                 key={item.name}
                 href={item.path} // Usa el atributo href para redirigir
@@ -49,33 +53,34 @@ export default function Navbar({ scrolled }: NavbarProps) {
                 {item.name}
               </motion.a>
             ))}
-            {/* Botón de iniciar sesión */}
+
+            {/* Botón de Iniciar Sesión */}
             <motion.a
-              href="/login" // Redirige al login
-              className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
+              href="https://app-lira.vercel.app/" // Cambia la ruta según tu aplicación
+              className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Iniciar Sesión
+              <LogIn className="w-5 h-5" /> {/* Ícono de Iniciar Sesión */}
+              <span>Iniciar Sesión</span>
             </motion.a>
-            {/* Botón de registro */}
+
+            {/* Botón de Registrarse */}
             <motion.a
-              href="/registro" // Redirige a la página de registro
-              className="rounded-full px-6 py-2 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition font-semibold text-lg tracking-wide"
+              href="https://app-lira.vercel.app/registro" // Cambia la ruta según tu aplicación
+              className="flex items-center space-x-2 bg-white border-2 border-orange-500 text-orange-500 px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg hover:bg-orange-50"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              Registrarse
+              <UserPlus className="w-5 h-5" /> {/* Ícono de Registrarse */}
+              <span>Registrarse</span>
             </motion.a>
           </div>
 
           <div className="md:hidden">
-            <button
-              className="p-2"
-              onClick={() => setMenuOpen(true)}
-            >
+            <button className="p-2" onClick={() => setMenuOpen(true)}>
               <Menu className="text-orange-600" />
             </button>
           </div>
@@ -93,47 +98,53 @@ export default function Navbar({ scrolled }: NavbarProps) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div className="flex justify-end p-4">
-              <button
-                className="p-2"
-                onClick={() => setMenuOpen(false)}
-              >
+              <button className="p-2" onClick={() => setMenuOpen(false)}>
                 <X className="text-orange-600" />
               </button>
             </div>
             <div className="flex flex-col items-center justify-center flex-1 space-y-8">
-              {[{ name: "Inicio", path: "/" }, { name: "Que es LIRA?", path: "/mision" }, { name: "Contacto", path: "/contacto" }].map((item, i) => (
+              {[
+                { name: "Inicio", path: "/" },
+                { name: "Que es LIRA?", path: "/mision" },
+                { name: "Contacto", path: "/contacto" },
+              ].map((item, i) => (
                 <motion.a
                   key={item.name}
-                  href={item.path} 
+                  href={item.path}
                   className="text-2xl font-semibold text-orange-800 tracking-wide"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * i }}
-                  onClick={() => setMenuOpen(false)} 
+                  onClick={() => setMenuOpen(false)}
                 >
                   {item.name}
                 </motion.a>
               ))}
-             
+
+              {/* Botón de Iniciar Sesión (versión móvil) */}
               <motion.a
-                href="/login" 
-                className="rounded-full px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 transition font-semibold text-lg tracking-wide"
+                href="https://app-lira.vercel.app/" // Cambia la ruta según tu aplicación
+                className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                onClick={() => setMenuOpen(false)}
               >
-                Iniciar Sesión
+                <LogIn className="w-5 h-5" /> {/* Ícono de Iniciar Sesión */}
+                <span>Iniciar Sesión</span>
               </motion.a>
-             
+
+              {/* Botón de Registrarse (versión móvil) */}
               <motion.a
-                href="/registro" 
-                className="rounded-full px-6 py-2 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition font-semibold text-lg tracking-wide"
+                href="https://app-lira.vercel.app/registro" // Cambia la ruta según tu aplicación
+                className="flex items-center space-x-2 bg-white border-2 border-orange-500 text-orange-500 px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg hover:bg-orange-50"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                onClick={() => setMenuOpen(false)} 
+                onClick={() => setMenuOpen(false)}
               >
-                Registrarse
+                <UserPlus className="w-5 h-5" /> {/* Ícono de Registrarse */}
+                <span>Registrarse</span>
               </motion.a>
             </div>
           </motion.div>
