@@ -56,7 +56,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
 
             {/* Botón de Iniciar Sesión */}
             <motion.a
-              href="http://localhost:5173/" // Cambia la ruta según tu aplicación
+              href="https://app-lira.vercel.app/" // Cambia la ruta según tu aplicación
               className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
 
               {/* Botón de Iniciar Sesión (versión móvil) */}
               <motion.a
-                href="http://localhost:5174/" // Cambia la ruta según tu aplicación
+                href="https://app-lira.vercel.app/" // Cambia la ruta según tu aplicación
                 className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

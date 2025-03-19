@@ -27,7 +27,7 @@ export default function Footer() {
             </div>
             <div className="flex space-x-6 mt-4">
               <motion.a
-                href="/login"
+                href="https://app-lira.vercel.app/"
                 className="hover:text-orange-500 transition-colors text-orange-800 font-semibold text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
