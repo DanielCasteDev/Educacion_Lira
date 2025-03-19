@@ -35,15 +35,6 @@ export default function Footer() {
               >
                 Iniciar Sesión
               </motion.a>
-              <motion.a
-                href="/registro"
-                className="hover:text-orange-500 transition-colors text-orange-800 font-semibold text-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                Registrarse
-              </motion.a>
             </div>
           </motion.div>
           <motion.div
