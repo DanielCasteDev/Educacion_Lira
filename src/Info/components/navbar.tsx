@@ -39,7 +39,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
           <div className="hidden md:flex space-x-6 items-center">
             {[
               { name: "Inicio", path: "/" },
-              { name: "Que es LIRA?", path: "/mision" },
+              { name: "Qué es LIRA?", path: "/mision" },
               { name: "Contacto", path: "/contacto" },
             ].map((item, i) => (
               <motion.a
@@ -93,7 +93,7 @@ export default function Navbar({ scrolled }: NavbarProps) {
             <div className="flex flex-col items-center justify-center flex-1 space-y-8">
               {[
                 { name: "Inicio", path: "/" },
-                { name: "Que es LIRA?", path: "/mision" },
+                { name: "Qué es LIRA?", path: "/mision" },
                 { name: "Contacto", path: "/contacto" },
               ].map((item, i) => (
                 <motion.a
