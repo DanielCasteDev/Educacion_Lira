@@ -25,7 +25,7 @@ export default function LoginTV() {
 
     try {
       // 1. Login en backend
-      const loginRes = await fetch("https://api-lira.onrender.com/login", {
+      const loginRes = await fetch("https://api-lira.onrender.com/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo, contraseña }),
@@ -41,7 +41,7 @@ export default function LoginTV() {
       const nombre = loginData.user?.nombre || "Usuario";
 
       // 2. Vincular token QR con nombre en backend
-      const tvLoginRes = await fetch("https://api-lira.onrender.com/tv-login", {
+      const tvLoginRes = await fetch("https://api-lira.onrender.com/api/tv-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ qr_token: qrToken, nombre }),
