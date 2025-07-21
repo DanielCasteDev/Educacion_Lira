@@ -98,50 +98,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, del
   </FadeInSection>
 );
 
-interface StatsCounterProps {
-  value: string;
-  label: string;
-  icon: React.ReactNode;
-  className?: string;
-  valueClassName?: string;
-  labelClassName?: string;
-  iconClassName?: string;
-}
 
-const StatsCounter: React.FC<StatsCounterProps> = ({ value, label, icon }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (inView) {
-      let start = 0;
-      const end = parseInt(value);
-      const duration = 2000;
-      const increment = end / (duration / 16);
-
-      const timer = setInterval(() => {
-        start += increment;
-        if (start > end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-
-      return () => clearInterval(timer);
-    }
-  }, [inView, value]);
-
-  return (
-    <div ref={ref} className="flex flex-col items-center p-6">
-      <div className="text-orange-500 mb-3">{icon}</div>
-      <h3 className="text-4xl font-bold text-orange-600 mb-2">{count.toLocaleString()}+</h3>
-      <p className="text-sm text-orange-800 uppercase tracking-wider">{label}</p>
-    </div>
-  );
-};
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
