@@ -16,7 +16,7 @@ export default function Footer() {
           >
             <div className="text-4xl font-bold text-orange-600 mb-4">LIRA</div>
             <p className="text-gray-600 mb-4 max-w-md">
-              Transformando la gestión de riesgos y asegurando un futuro más seguro para todos.
+              Revolucionando el aprendizaje de lectura con tecnología interactiva y personalizada para cada niño.
             </p>
             <div className="flex space-x-4">
               <a
@@ -65,9 +65,6 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { name: "Inicio", path: "/" },
-                { name: "¿Qué es LIRA?", path: "/mision" },
-                { name: "Servicios", path: "/servicios" },
-                { name: "Blog", path: "/blog" },
                 { name: "Contacto", path: "/contacto" }
               ].map((item) => (
                 <li key={item.name}>
@@ -93,11 +90,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2 text-gray-600">
                 <FaEnvelope className="h-5 w-5 text-orange-600" />
-                <span>contacto@lira.com</span>
+                <span>info@liraeducacion.com</span>
               </li>
               <li className="flex items-center space-x-2 text-gray-600">
                 <FaPhone className="h-5 w-5 text-orange-600" />
-                <span>+1 (555) 123-4567</span>
+                <span>+52 33 1234 5678</span>
               </li>
             </ul>
             <motion.a
