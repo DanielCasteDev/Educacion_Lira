@@ -1,170 +1,100 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import { PuzzlePieceIcon, ChartBarIcon, GlobeAltIcon } from "@heroicons/react/24/solid"; // Importa los iconos que necesitas
+import React, { useState, useEffect } from "react";
 
-export default function MisionVision() {
-  const [scrolled, setScrolled] = useState(false);
+export default function LoginTV() {
+  const [qrToken, setQrToken] = useState("");
+  const [correo, setCorreo] = useState("");
+  const [contraseña, setContraseña] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    if (token) setQrToken(token);
+    else setStatus("No se encontró token QR en la URL.");
   }, []);
 
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    if (!qrToken) {
+      setStatus("Token QR no disponible.");
+      return;
+    }
+
+    setStatus("Iniciando sesión...");
+
+    try {
+      // 1. Login en backend
+      const loginRes = await fetch("https://api-lira.onrender.com/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo, contraseña }),
+      });
+
+      if (!loginRes.ok) {
+        const errorData = await loginRes.json();
+        throw new Error(errorData.message || "Error en login");
+      }
+
+      const loginData = await loginRes.json();
+
+      const nombre = loginData.user?.nombre || "Usuario";
+
+      // 2. Vincular token QR con nombre en backend
+      const tvLoginRes = await fetch("https://api-lira.onrender.com/tv-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ qr_token: qrToken, nombre }),
+      });
+
+      if (!tvLoginRes.ok) {
+        const errorTv = await tvLoginRes.json();
+        throw new Error(errorTv.message || "Error vinculando con TV");
+      }
+
+      setStatus("¡Login exitoso! Puedes volver a la TV.");
+
+    } catch (err) {
+      setStatus("Error: " + (err instanceof Error ? err.message : String(err)));
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* Navbar */}
-      <Navbar scrolled={scrolled} />
-
-      {/* Hero Section */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-orange-50 to-yellow-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
-          />
-          <motion.div
-            className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-yellow-100"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
-          <motion.div
-            className="absolute top-32 -left-16 w-32 h-32 rounded-full bg-orange-100"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          />
-        </div>
-
-        <div className="container mx-auto px-4 z-10">
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6 text-center text-orange-600"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            ¿Qué es LIRA?
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-center max-w-2xl mx-auto mb-12 text-orange-800"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Lira es una aplicación educativa diseñada para enseñar a los niños a leer mediante juegos interactivos y actividades divertidas, como completar palabras, decir sílabas y reconocer nombres de animales, ofreciendo una experiencia de aprendizaje personalizada y accesible para todas las familias.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Combined Mission and Vision Section */}
-      <section className="py-20 bg-orange-50">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Nuestra Misión y Visión
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Misión */}
-            <motion.div
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <h3 className="text-2xl font-bold mb-4 text-orange-600">Misión</h3>
-              <p className="text-gray-600">
-                En Lira, nos dedicamos a transformar la educación de la lectura en una experiencia interactiva, divertida y accesible para todos los niños. Utilizamos tecnología innovadora para crear herramientas educativas que se adapten a las necesidades individuales de cada niño.
-              </p>
-            </motion.div>
-
-            {/* Visión */}
-            <motion.div
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <h3 className="text-2xl font-bold mb-4 text-orange-600">Visión</h3>
-              <p className="text-gray-600">
-                Queremos ser reconocidos como la plataforma líder en educación infantil, inspirando a las nuevas generaciones a amar la lectura y el aprendizaje. Buscamos reducir la brecha educativa y promover la igualdad de oportunidades para todos los niños.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-16 text-center text-orange-600"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            ¿Cómo lo hacemos?
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <PuzzlePieceIcon className="h-12 w-12 text-orange-500" />, // Icono de rompecabezas
-                title: "Juegos Interactivos",
-                desc: "Actividades divertidas que enseñan a los niños a leer mientras juegan.",
-              },
-              {
-                icon: <ChartBarIcon className="h-12 w-12 text-orange-500" />, // Icono de gráfico
-                title: "Seguimiento Personalizado",
-                desc: "Adaptamos el contenido al ritmo de aprendizaje de cada niño.",
-              },
-              {
-                icon: <GlobeAltIcon className="h-12 w-12 text-orange-500" />, // Icono de globo
-                title: "Acceso Global",
-                desc: "Llegamos a familias de todo el mundo, sin importar su ubicación.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                {/* Contenedor para centrar el icono */}
-                <div className="flex justify-center items-center mb-4">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-orange-600">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer />
+    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
+      <h2>Login para TV</h2>
+      {!qrToken ? (
+        <p style={{ color: "red" }}>Token QR no detectado en la URL</p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Correo:<br />
+            <input
+              type="email"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              required
+              autoFocus
+              style={{ width: "100%", padding: 8 }}
+            />
+          </label>
+          <br /><br />
+          <label>
+            Contraseña:<br />
+            <input
+              type="password"
+              value={contraseña}
+              onChange={(e) => setContraseña(e.target.value)}
+              required
+              style={{ width: "100%", padding: 8 }}
+            />
+          </label>
+          <br /><br />
+          <button type="submit" style={{ padding: "10px 20px" }}>
+            Iniciar sesión
+          </button>
+        </form>
+      )}
+      <p>{status}</p>
     </div>
   );
 }
