@@ -40,7 +40,7 @@ export default function LoginTV() {
 
     try {
       // 1. Login en backend
-      const loginRes = await fetch("https://api-lira.onrender.com/api/login", {
+      const loginRes = await fetch("https://api-lira.onrender.com/api/tv-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo, contraseña }),
