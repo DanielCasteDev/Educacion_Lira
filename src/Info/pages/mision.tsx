@@ -27,55 +27,40 @@ export default function LoginTV() {
     }
   }, []);
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  e.preventDefault();
 
-    if (!qrToken) {
-      setStatus("Token QR no disponible.");
-      return;
+  if (!qrToken) {
+    setStatus("Token QR no disponible.");
+    return;
+  }
+
+  setIsLoading(true);
+  setStatus("Iniciando sesión...");
+
+  try {
+    const loginRes = await fetch("https://api-lira.onrender.com/api/tv-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo, contraseña, qr_token: qrToken }),
+    });
+
+    if (!loginRes.ok) {
+      const errorData = await loginRes.json();
+      throw new Error(errorData.message || "Error en login");
     }
 
-    setIsLoading(true);
-    setStatus("Iniciando sesión...");
+    setStatus("¡Login exitoso! Puedes volver a la TV.");
+    setIsSuccess(true);
 
-    try {
-      // 1. Login en backend
-      const loginRes = await fetch("https://api-lira.onrender.com/api/tv-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo, contraseña }),
-      });
+  } catch (err) {
+    setStatus("Error: " + (err instanceof Error ? err.message : String(err)));
+    setIsSuccess(false);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-      if (!loginRes.ok) {
-        const errorData = await loginRes.json();
-        throw new Error(errorData.message || "Error en login");
-      }
-
-      const loginData = await loginRes.json();
-      const nombre = loginData.user?.nombre || "Usuario";
-
-      // 2. Vincular token QR con nombre en backend
-      const tvLoginRes = await fetch("https://api-lira.onrender.com/api/tv-login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ qr_token: qrToken, nombre }),
-      });
-
-      if (!tvLoginRes.ok) {
-        const errorTv = await tvLoginRes.json();
-        throw new Error(errorTv.message || "Error vinculando con TV");
-      }
-
-      setStatus("¡Login exitoso! Puedes volver a la TV.");
-      setIsSuccess(true);
-
-    } catch (err) {
-      setStatus("Error: " + (err instanceof Error ? err.message : String(err)));
-      setIsSuccess(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 relative overflow-hidden">
